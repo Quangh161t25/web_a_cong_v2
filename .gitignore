@@ -1,0 +1,14 @@
+# Python scripts
+*.py
+__pycache__/
+*.pyc
+
+# Downloaded raw files (quá nặng, không cần push)
+downloaded/
+
+# Node
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db

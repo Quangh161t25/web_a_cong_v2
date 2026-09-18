@@ -1,0 +1,13 @@
+{
+  "name": "erp-local",
+  "version": "1.0.0",
+  "description": "ERP - Phần mềm quản lý doanh nghiệp (Local Copy)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["erp", "vietnam", "quan-ly-doanh-nghiep"],
+  "author": "",
+  "license": "ISC"
+}
