@@ -1,10 +1,15 @@
-# Python scripts
+# Downloaded raw files (quá nặng, không cần push)
+downloaded/
+
+# Python scripts (chỉ dùng để build local)
 *.py
 __pycache__/
 *.pyc
+sw_template.js
+downloaded_index.html
 
-# Downloaded raw files (quá nặng, không cần push)
-downloaded/
+# Old site folder (dùng docs/ cho GitHub Pages)
+site/
 
 # Node
 node_modules/
