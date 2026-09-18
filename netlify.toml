@@ -1,0 +1,8 @@
+[[redirects]]
+  from = "/*"
+  to = "https://template00013.5fedu.com/:splat"
+  status = 200
+  force = true
+
+  [redirects.headers]
+    X-Forwarded-Host = "template00013.5fedu.com"
