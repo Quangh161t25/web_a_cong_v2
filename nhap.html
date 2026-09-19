@@ -46,7 +46,6 @@
       font-family: 'Inter', sans-serif;
       color: #0f172a;
     }
-    /* Scrollbar */
     ::-webkit-scrollbar { width: 5px; height: 5px; }
     ::-webkit-scrollbar-track { background: transparent; }
     ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
@@ -55,7 +54,7 @@
     .view-pane { display: none; }
     .view-pane.active { display: block; }
 
-    /* Custom pill badges */
+    /* Custom Badges */
     .badge-gray { background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; }
     .badge-green { background: #dcfce7; color: #15803d; }
     .badge-amber { background: #fef3c7; color: #b45309; }
@@ -70,9 +69,8 @@
 
   <!-- ================= TOP HEADER ================= -->
   <header class="h-14 bg-white border-b border-slate-200/80 flex items-center justify-between px-4 sm:px-6 sticky top-0 z-30 select-none shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
-    <!-- Left: Logo & Breadcrumbs -->
+    <!-- Left: Logo & Dynamic Breadcrumbs -->
     <div class="flex items-center gap-4 sm:gap-6">
-      <!-- Logo brand -->
       <div class="flex items-center gap-2.5 cursor-pointer" onclick="navigate('home')">
         <div class="w-8 h-8 rounded-xl bg-blue-600 flex items-center justify-center text-white shadow-sm shadow-blue-500/30">
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -85,7 +83,6 @@
         </div>
       </div>
 
-      <!-- Divider -->
       <div class="h-5 w-[1px] bg-slate-200 hidden sm:block"></div>
 
       <!-- Breadcrumbs Bar -->
@@ -213,6 +210,17 @@
       <!-- ================= 2. VIEW: TÀI CHÍNH -> KẾ HOẠCH CHI PHÍ ================= -->
       <div id="view-ke-hoach-chi-phi" class="view-pane space-y-4">
         
+        <!-- Navigation Sub-Tabs -->
+        <div class="flex items-center gap-2 border-b border-slate-200/80 pb-2 overflow-x-auto text-xs font-semibold">
+          <button onclick="navigate('ke-hoach-chi-phi')" class="px-3 py-1.5 rounded-lg bg-blue-600 text-white shadow-xs">Kế hoạch chi phí</button>
+          <button onclick="navigate('de-xuat-chi-phi')" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 text-slate-600">Đề xuất chi phí</button>
+          <button onclick="navigate('thu-chi')" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 text-slate-600">Thu chi</button>
+          <button onclick="navigate('tam-ung')" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 text-slate-600">Tạm ứng / hoàn ứng</button>
+          <button onclick="navigate('danh-muc')" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 text-slate-600">Danh mục tài chính</button>
+          <button onclick="navigate('tai-khoan')" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 text-slate-600">Tài khoản</button>
+          <button onclick="navigate('doi-tuong')" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 text-slate-600">Đối tượng</button>
+        </div>
+
         <!-- Action Toolbar -->
         <div class="flex flex-wrap items-center justify-between gap-3 bg-white p-3 rounded-2xl border border-slate-200/80 shadow-xs">
           <div class="flex items-center gap-3 flex-1">
@@ -270,12 +278,166 @@
 
       </div>
 
-      <!-- ================= 3. VIEW: TỔNG QUAN (LIVE TV & KPI) ================= -->
+      <!-- ================= 3. VIEW: ĐỀ XUẤT CHI PHÍ ================= -->
+      <div id="view-de-xuat-chi-phi" class="view-pane space-y-4">
+        <div class="flex items-center gap-2 border-b border-slate-200/80 pb-2 overflow-x-auto text-xs font-semibold">
+          <button onclick="navigate('ke-hoach-chi-phi')" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 text-slate-600">Kế hoạch chi phí</button>
+          <button onclick="navigate('de-xuat-chi-phi')" class="px-3 py-1.5 rounded-lg bg-blue-600 text-white shadow-xs">Đề xuất chi phí</button>
+          <button onclick="navigate('thu-chi')" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 text-slate-600">Thu chi</button>
+          <button onclick="navigate('tam-ung')" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 text-slate-600">Tạm ứng / hoàn ứng</button>
+          <button onclick="navigate('danh-muc')" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 text-slate-600">Danh mục tài chính</button>
+          <button onclick="navigate('tai-khoan')" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 text-slate-600">Tài khoản</button>
+          <button onclick="navigate('doi-tuong')" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 text-slate-600">Đối tượng</button>
+        </div>
+
+        <div class="flex items-center justify-between bg-white p-3 rounded-2xl border border-slate-200/80 shadow-xs">
+          <h3 class="font-bold text-xs text-slate-800">Danh sách Đề xuất Chi phí</h3>
+          <button onclick="alert('Tạo đề xuất mới')" class="px-3 py-1.5 bg-blue-600 text-white rounded-xl text-xs font-bold shadow-xs">+ Lập đề xuất</button>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-50 text-slate-600 font-bold border-b border-slate-200/80 text-[11px]">
+              <tr>
+                <th class="py-3 px-4">Số phiếu</th>
+                <th class="py-3 px-4">Người đề xuất</th>
+                <th class="py-3 px-4">Phòng ban</th>
+                <th class="py-3 px-4">Khoản mục</th>
+                <th class="py-3 px-4 text-right">Số tiền</th>
+                <th class="py-3 px-4 text-center">Trạng thái duyệt</th>
+                <th class="py-3 px-4 text-center">Thao tác</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr>
+                <td class="py-3 px-4 font-mono font-bold text-blue-600">DX2609-0001</td>
+                <td class="py-3 px-4 font-semibold">Trần Quốc Dũng</td>
+                <td class="py-3 px-4">Phòng Kỹ thuật</td>
+                <td class="py-3 px-4">Bảo trì hệ thống Server AWS</td>
+                <td class="py-3 px-4 text-right font-bold text-rose-600">32.000.000 đ</td>
+                <td class="py-3 px-4 text-center"><span class="badge-green px-2.5 py-0.5 rounded-full text-[10px] font-semibold">Đã duyệt</span></td>
+                <td class="py-3 px-4 text-center"><button class="text-blue-600 font-bold hover:underline">Chi tiết</button></td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-mono font-bold text-blue-600">DX2609-0002</td>
+                <td class="py-3 px-4 font-semibold">Nguyễn Thuỳ Dung</td>
+                <td class="py-3 px-4">Phòng Nhân sự</td>
+                <td class="py-3 px-4">Tổ chức Trung thu cho CBNV</td>
+                <td class="py-3 px-4 text-right font-bold text-rose-600">18.500.000 đ</td>
+                <td class="py-3 px-4 text-center"><span class="badge-amber px-2.5 py-0.5 rounded-full text-[10px] font-semibold">Chờ duyệt</span></td>
+                <td class="py-3 px-4 text-center"><button class="text-blue-600 font-bold hover:underline">Chi tiết</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ================= 4. VIEW: THU - CHI ================= -->
+      <div id="view-thu-chi" class="view-pane space-y-4">
+        <div class="flex items-center gap-2 border-b border-slate-200/80 pb-2 overflow-x-auto text-xs font-semibold">
+          <button onclick="navigate('ke-hoach-chi-phi')" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 text-slate-600">Kế hoạch chi phí</button>
+          <button onclick="navigate('de-xuat-chi-phi')" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 text-slate-600">Đề xuất chi phí</button>
+          <button onclick="navigate('thu-chi')" class="px-3 py-1.5 rounded-lg bg-blue-600 text-white shadow-xs">Thu chi</button>
+          <button onclick="navigate('tam-ung')" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 text-slate-600">Tạm ứng / hoàn ứng</button>
+          <button onclick="navigate('danh-muc')" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 text-slate-600">Danh mục tài chính</button>
+          <button onclick="navigate('tai-khoan')" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 text-slate-600">Tài khoản</button>
+          <button onclick="navigate('doi-tuong')" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 text-slate-600">Đối tượng</button>
+        </div>
+
+        <div class="flex items-center justify-between bg-white p-3 rounded-2xl border border-slate-200/80 shadow-xs">
+          <h3 class="font-bold text-xs text-slate-800">Sổ quỹ Thu - Chi</h3>
+          <div class="flex gap-2">
+            <button class="px-3 py-1.5 bg-emerald-600 text-white rounded-xl text-xs font-bold shadow-xs">+ Phiếu Thu</button>
+            <button class="px-3 py-1.5 bg-rose-600 text-white rounded-xl text-xs font-bold shadow-xs">+ Phiếu Chi</button>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-50 text-slate-600 font-bold border-b border-slate-200/80 text-[11px]">
+              <tr>
+                <th class="py-3 px-4">Mã giao dịch</th>
+                <th class="py-3 px-4">Ngày ghi sổ</th>
+                <th class="py-3 px-4">Tài khoản</th>
+                <th class="py-3 px-4">Khoản mục</th>
+                <th class="py-3 px-4">Đối tượng</th>
+                <th class="py-3 px-4 text-right">Số tiền</th>
+                <th class="py-3 px-4 text-center">Trạng thái</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr>
+                <td class="py-3 px-4 font-mono font-bold text-slate-800">TC2609-001</td>
+                <td class="py-3 px-4 text-slate-500">2026-09-05</td>
+                <td class="py-3 px-4 font-semibold">Techcombank - Chi lương</td>
+                <td class="py-3 px-4">Lương nhân viên</td>
+                <td class="py-3 px-4">Toàn thể CBNV</td>
+                <td class="py-3 px-4 text-right font-bold text-rose-600">-125.000.000 đ</td>
+                <td class="py-3 px-4 text-center"><span class="badge-green px-2 py-0.5 rounded-full text-[10px] font-semibold">Đã hạch toán</span></td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-mono font-bold text-slate-800">TC2609-002</td>
+                <td class="py-3 px-4 text-slate-500">2026-09-04</td>
+                <td class="py-3 px-4 font-semibold">Vietcombank - Tài khoản chính</td>
+                <td class="py-3 px-4">Thu tiền phần mềm ERP</td>
+                <td class="py-3 px-4">Công ty CP Vintech</td>
+                <td class="py-3 px-4 text-right font-bold text-emerald-600">+150.000.000 đ</td>
+                <td class="py-3 px-4 text-center"><span class="badge-green px-2 py-0.5 rounded-full text-[10px] font-semibold">Đã hạch toán</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ================= 5. VIEW: TẠM ỨNG ================= -->
+      <div id="view-tam-ung" class="view-pane space-y-4">
+        <div class="flex items-center gap-2 border-b border-slate-200/80 pb-2 overflow-x-auto text-xs font-semibold">
+          <button onclick="navigate('ke-hoach-chi-phi')" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 text-slate-600">Kế hoạch chi phí</button>
+          <button onclick="navigate('de-xuat-chi-phi')" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 text-slate-600">Đề xuất chi phí</button>
+          <button onclick="navigate('thu-chi')" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 text-slate-600">Thu chi</button>
+          <button onclick="navigate('tam-ung')" class="px-3 py-1.5 rounded-lg bg-blue-600 text-white shadow-xs">Tạm ứng / hoàn ứng</button>
+          <button onclick="navigate('danh-muc')" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 text-slate-600">Danh mục tài chính</button>
+          <button onclick="navigate('tai-khoan')" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 text-slate-600">Tài khoản</button>
+          <button onclick="navigate('doi-tuong')" class="px-3 py-1.5 rounded-lg hover:bg-slate-100 text-slate-600">Đối tượng</button>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200/80 shadow-xs overflow-hidden">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-50 text-slate-600 font-bold border-b border-slate-200/80 text-[11px]">
+              <tr>
+                <th class="py-3 px-4">Mã tạm ứng</th>
+                <th class="py-3 px-4">Nhân viên</th>
+                <th class="py-3 px-4">Lý do</th>
+                <th class="py-3 px-4 text-right">Số tiền</th>
+                <th class="py-3 px-4 text-center">Trạng thái</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr>
+                <td class="py-3 px-4 font-mono font-bold text-amber-600">TU001</td>
+                <td class="py-3 px-4 font-semibold">Trần Văn Hùng</td>
+                <td class="py-3 px-4">Tạm ứng công tác Hà Nội gặp khách hàng 3 ngày</td>
+                <td class="py-3 px-4 text-right font-bold text-amber-600">12.000.000 đ</td>
+                <td class="py-3 px-4 text-center"><span class="badge-amber px-2 py-0.5 rounded-full text-[10px] font-semibold">Chờ quyết toán</span></td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 font-mono font-bold text-amber-600">TU002</td>
+                <td class="py-3 px-4 font-semibold">Lê Thị Mai</td>
+                <td class="py-3 px-4">Tạm ứng mua văn phòng phẩm quý 3</td>
+                <td class="py-3 px-4 text-right font-bold text-amber-600">5.500.000 đ</td>
+                <td class="py-3 px-4 text-center"><span class="badge-green px-2 py-0.5 rounded-full text-[10px] font-semibold">Đã hoàn ứng</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ================= 6. VIEW: TỔNG QUAN ================= -->
       <div id="view-overview" class="view-pane space-y-6">
         <div class="flex items-center justify-between">
           <div>
             <h2 class="text-xl font-bold text-slate-900">Tổng quan Hệ thống</h2>
-            <p class="text-xs text-slate-400">Thống kê nhân sự, chấm công và tài chính hôm nay</p>
+            <p class="text-xs text-slate-400">Thống kê nhân sự hôm nay và màn hình Live TV</p>
           </div>
           <button onclick="navigate('home')" class="px-3 py-1.5 border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">← Về trang chủ</button>
         </div>
@@ -283,77 +445,47 @@
         <!-- 4 KPI Cards -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
-            <span class="text-[11px] font-semibold text-slate-400 uppercase">Tồn quỹ khả dụng</span>
+            <span class="text-[11px] font-semibold text-slate-400 uppercase">Tồn quỹ</span>
             <h3 class="text-2xl font-black text-slate-900 mt-1">2.866.100.000 đ</h3>
-            <p class="text-xs text-emerald-600 font-semibold mt-1">4 tài khoản ngân hàng</p>
+            <p class="text-xs text-slate-400 mt-1">4 tài khoản</p>
           </div>
           <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
             <span class="text-[11px] font-semibold text-slate-400 uppercase">Thu tháng này</span>
             <h3 class="text-2xl font-black text-emerald-600 mt-1">395.000.000 đ</h3>
-            <p class="text-xs text-slate-400 mt-1">12 phiếu thu hợp lệ</p>
+            <p class="text-xs text-slate-400 mt-1">12 thu</p>
           </div>
           <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
             <span class="text-[11px] font-semibold text-slate-400 uppercase">Chi tháng này</span>
             <h3 class="text-2xl font-black text-rose-600 mt-1">161.300.000 đ</h3>
-            <p class="text-xs text-slate-400 mt-1">Đạt 42% kế hoạch năm</p>
+            <p class="text-xs text-slate-400 mt-1">Chi / kế hoạch</p>
           </div>
           <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
-            <span class="text-[11px] font-semibold text-slate-400 uppercase">Tạm ứng tồn</span>
+            <span class="text-[11px] font-semibold text-slate-400 uppercase">Tạm ứng chưa quyết toán</span>
             <h3 class="text-2xl font-black text-amber-600 mt-1">55.000.000 đ</h3>
-            <p class="text-xs text-amber-600 font-semibold mt-1">4 phiếu chưa hoàn ứng</p>
+            <p class="text-xs text-amber-600 font-semibold mt-1">4 phiếu</p>
           </div>
         </div>
 
-        <!-- Chart Section -->
         <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-xs">
-          <h3 class="text-sm font-bold text-slate-800 mb-4">Biểu đồ Thu / Chi 6 tháng gần nhất</h3>
+          <h3 class="text-sm font-bold text-slate-800 mb-4">Thu / chi 6 tháng gần nhất</h3>
           <div class="h-64">
             <canvas id="overviewChartCanvas"></canvas>
           </div>
         </div>
       </div>
 
-      <!-- ================= 4. VIEW: TÀI CHÍNH (SUB-MODULES MENU) ================= -->
-      <div id="view-finance" class="view-pane space-y-6">
-        <div class="flex items-center justify-between">
-          <div>
-            <h2 class="text-xl font-bold text-slate-900">Phân hệ Tài chính</h2>
-            <p class="text-xs text-slate-400">Chọn một nghiệp vụ tài chính cần quản lý</p>
-          </div>
-          <button onclick="navigate('home')" class="px-3 py-1.5 border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">← Về trang chủ</button>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          <div onclick="navigate('ke-hoach-chi-phi')" class="bg-white p-6 rounded-3xl border border-slate-200 hover:border-blue-400 shadow-xs hover:shadow-md transition cursor-pointer">
-            <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold mb-3">📋</div>
-            <h3 class="font-bold text-sm text-slate-800">Kế hoạch chi phí</h3>
-            <p class="text-xs text-slate-400 mt-1">Ngân sách cả năm theo khoản mục và phòng ban.</p>
-          </div>
-          <div onclick="navigate('thu-chi')" class="bg-white p-6 rounded-3xl border border-slate-200 hover:border-emerald-400 shadow-xs hover:shadow-md transition cursor-pointer">
-            <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold mb-3">💵</div>
-            <h3 class="font-bold text-sm text-slate-800">Thu - Chi</h3>
-            <p class="text-xs text-slate-400 mt-1">Phiếu thu, phiếu chi và luân chuyển tài khoản.</p>
-          </div>
-          <div onclick="navigate('tam-ung')" class="bg-white p-6 rounded-3xl border border-slate-200 hover:border-amber-400 shadow-xs hover:shadow-md transition cursor-pointer">
-            <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center font-bold mb-3">🤝</div>
-            <h3 class="font-bold text-sm text-slate-800">Tạm ứng / hoàn ứng</h3>
-            <p class="text-xs text-slate-400 mt-1">Tạm ứng cho nhân viên và quyết toán chi tiêu.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- ================= 5. VIEW: HỆ THỐNG ================= -->
+      <!-- ================= 7. VIEW: HỆ THỐNG ================= -->
       <div id="view-system" class="view-pane space-y-6">
         <div class="flex items-center justify-between">
           <div>
             <h2 class="text-xl font-bold text-slate-900">Quản trị Hệ thống</h2>
-            <p class="text-xs text-slate-400">Danh mục nhân sự, cơ cấu phòng ban và phân quyền</p>
+            <p class="text-xs text-slate-400">Cấu hình, phân quyền và nhân sự</p>
           </div>
           <button onclick="navigate('home')" class="px-3 py-1.5 border border-slate-200 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-50">← Về trang chủ</button>
         </div>
 
-        <div class="bg-white rounded-3xl border border-slate-200 p-6 shadow-xs">
-          <h3 class="font-bold text-sm text-slate-800 mb-4">Cơ cấu Phòng ban Công ty</h3>
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 shadow-xs space-y-4">
+          <h3 class="font-bold text-sm text-slate-800">Cơ cấu Phòng ban Công ty</h3>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
             <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80">
               <div class="font-bold text-sm text-slate-900">Phòng Ban Giám Đốc</div>
@@ -375,18 +507,18 @@
         </div>
       </div>
 
-      <!-- ================= 6. VIEW: THÔNG TIN BẢN QUYỀN ================= -->
+      <!-- ================= 8. VIEW: THÔNG TIN BẢN QUYỀN ================= -->
       <div id="view-license" class="view-pane space-y-6">
         <div class="bg-white rounded-3xl border border-slate-200 p-8 shadow-xs max-w-3xl space-y-4">
           <div class="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center font-bold text-lg mb-2">©</div>
-          <h2 class="text-xl font-bold text-slate-900">Thông tin Bản quyền Phần mềm ERP</h2>
+          <h2 class="text-xl font-bold text-slate-900">Thông tin Bản quyền</h2>
           <p class="text-xs text-slate-500 leading-relaxed">
-            Hệ thống Quản lý Doanh nghiệp Toàn diện (ERP Enterprise Platform v2.5). Bản quyền thuộc về Đơn vị phát triển & Khách hàng doanh nghiệp. Mọi hành vi sao chép không được phép đều bị nghiêm cấm theo Luật Sở hữu Trí tuệ.
+            Quản lý sở hữu trí tuệ và thông tin nhà phát triển. Bản quyền thuộc về Đơn vị phát triển & Khách hàng doanh nghiệp.
           </p>
           <div class="pt-4 border-t border-slate-100 text-xs space-y-2 text-slate-600">
             <div>• <strong>Người đại diện:</strong> Lê Minh Công</div>
             <div>• <strong>Mã số thuế:</strong> 0108998877</div>
-            <div>• <strong>Phiên bản:</strong> 2.5.0-Release</div>
+            <div>• <strong>Địa chỉ trụ sở:</strong> Tầng 18, Tòa nhà Landmark, Hà Nội</div>
           </div>
         </div>
       </div>
@@ -464,8 +596,8 @@
       const targetPane = document.getElementById('view-' + viewId);
       if (targetPane) targetPane.classList.add('active');
 
-      const activeNav = document.querySelector(`.nav-btn[data-nav="${viewId}"]`) || 
-                        (viewId.includes('ke-hoach') || viewId.includes('finance') ? document.querySelector('.nav-btn[data-nav="finance"]') : null);
+      const isFinanceSub = ['ke-hoach-chi-phi', 'de-xuat-chi-phi', 'thu-chi', 'tam-ung', 'danh-muc', 'tai-khoan', 'doi-tuong'].includes(viewId);
+      const activeNav = isFinanceSub ? document.querySelector('.nav-btn[data-nav="finance"]') : document.querySelector(`.nav-btn[data-nav="${viewId}"]`);
       
       if (activeNav) {
         activeNav.classList.add('bg-blue-600', 'text-white', 'shadow-xs');
@@ -482,6 +614,12 @@
         bc.innerHTML = `<span>Trang chủ</span> <span class="text-slate-300">›</span> <span class="px-2.5 py-1 rounded bg-blue-600 text-white text-[11px] font-semibold">Tổng quan</span>`;
       } else if (viewId === 'ke-hoach-chi-phi') {
         bc.innerHTML = `<span>Trang chủ</span> <span class="text-slate-300">›</span> <span>Tài chính</span> <span class="text-slate-300">›</span> <span class="px-2.5 py-1 rounded bg-blue-600 text-white text-[11px] font-semibold">Kế hoạch chi phí</span>`;
+      } else if (viewId === 'de-xuat-chi-phi') {
+        bc.innerHTML = `<span>Trang chủ</span> <span class="text-slate-300">›</span> <span>Tài chính</span> <span class="text-slate-300">›</span> <span class="px-2.5 py-1 rounded bg-blue-600 text-white text-[11px] font-semibold">Đề xuất chi phí</span>`;
+      } else if (viewId === 'thu-chi') {
+        bc.innerHTML = `<span>Trang chủ</span> <span class="text-slate-300">›</span> <span>Tài chính</span> <span class="text-slate-300">›</span> <span class="px-2.5 py-1 rounded bg-blue-600 text-white text-[11px] font-semibold">Thu chi</span>`;
+      } else if (viewId === 'tam-ung') {
+        bc.innerHTML = `<span>Trang chủ</span> <span class="text-slate-300">›</span> <span>Tài chính</span> <span class="text-slate-300">›</span> <span class="px-2.5 py-1 rounded bg-blue-600 text-white text-[11px] font-semibold">Tạm ứng</span>`;
       } else if (viewId === 'finance') {
         bc.innerHTML = `<span>Trang chủ</span> <span class="text-slate-300">›</span> <span class="px-2.5 py-1 rounded bg-blue-600 text-white text-[11px] font-semibold">Tài chính</span>`;
       } else if (viewId === 'system') {
